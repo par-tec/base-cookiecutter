@@ -13,15 +13,22 @@ Accepted
 ## Context
 
 We need to record the architectural decisions made on this project.
+ADR should stay at design/decision level,
+without specific implementation details, code snippets
+or step by step procedures.
 
 This ADR is the template to use for all the others ADR:
 customize this file to ensure it fits your needs and
 ensure that all the ADRs follow the same format.
 
+The context provides the basic information that leads
+to decision, and may include the considered alternatives.
+
 ## Decision
 
 - [ ] We will use Architecture Decision Records, as [described by Michael Nygard](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions).
 - [ ] Decision is a list of checkboxes, to be marked as the decision is implemented.
+- [ ] Avoid adding specific implementation details, code snippets or step-by-step procedures.
 - [ ] Consequences section contain Pros and Cons of decision,
   in the form of bullet list.
 
