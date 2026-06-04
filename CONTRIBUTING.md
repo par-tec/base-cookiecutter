@@ -9,15 +9,21 @@ other checks on them.
 
 Once you install it via
 
-        pip3 install pre-commit --user
+```
+    pip3 install pre-commit --user
+```
 
 You can run it directly via
 
-        pre-commit run --all-files
+```
+    pre-commit run --all-files
+```
 
 Or install it as a pre-commit hook
 
-        pre-commit install
+```
+    pre-commit install
+```
 
 ## Making a PR
 
@@ -34,52 +40,67 @@ Each PR should be associated with an issue and a branch;
 if the PR already exists, you can just start working from it.
 
 1. If there's no issue for your PR, create one where you describe the expected behavior and the current behavior;
+
 1. If you are not a member of the organization, fork the repository and fetch from both your fork and the origin
 
-        GH=ioggstream  # use your github username
-        git clone -o par-tec https://github.com/par-tec/python-cookiecutter
-        cd python-cookiecutter
-        git remote add origin git@github.com:${GH}/python-cookiecutter.git
+   ```
+    GH=ioggstream  # use your github username
+    git clone -o par-tec https://github.com/par-tec/python-cookiecutter
+    cd python-cookiecutter
+    git remote add origin git@github.com:${GH}/python-cookiecutter.git
+   ```
 
 1. Create a branch for your PR fetching from the main branch, using your username and issue-number as branch name.
    Before checkout, make sure you have the latest version of the `par-tec/main` branch.
 
-        ISSUE=123  # use the issue number
-        BRANCH=${GH}-${ISSUE}
-        git fetch --all
-        git checkout -b ${BRANCH} par-tec/main
+   ```
+    ISSUE=123  # use the issue number
+    BRANCH=${GH}-${ISSUE}
+    git fetch --all
+    git checkout -b ${BRANCH} par-tec/main
+   ```
 
    If the PR already exists, you can continue to work on it, always fetching the latest version
    and ensuring that your working copy is up to date. Otherwise, you risk to work waste time
    resolving conflicts.
 
-        git fetch --all  # Always download latest changes
-        git checkout par-tec/${BRANCH}
+   ```
+    git fetch --all  # Always download latest changes
+    git checkout par-tec/${BRANCH}
+   ```
 
 1. Make your changes (this includes [pre-commit checks](#pre-commit)) and review them when adding.
    This is an important and overlooked step, especially when
    you are working alone or on a large PR. Moreover this allows you to split your changes in multiple commits
    or to discard some of changes that you still want to temporarily keep in your working directory.
 
-        git add -p
+   ```
+    git add -p
+   ```
 
 1. You can now commit them. If your PR fixes the issue,
    the commit message should start with `Fix: #ISSUE` where `ISSUE` is the issue number.
    Otherwise, a reference to the issue can be added in the commit message body.
 
-        git add .
-        git commit -m "Fix: #$ISSUE. Brief description of the changes."
+   ```
+    git add .
+    git commit -m "Fix: #$ISSUE. Brief description of the changes."
+   ```
 
    If the PR does not fix the issue, you can always reference it
    in the commit messages.
 
-        git commit -m "Brief description of the changes. See #ISSUE."
+   ```
+    git commit -m "Brief description of the changes. See #ISSUE."
+   ```
 
 1. Now you can push the branch and create the PR.
    If your branch is published on your fork, you can create the PR directly
    from github.
 
-        git push origin ${BRANCH}
+   ```
+    git push origin ${BRANCH}
+   ```
 
    When opening the PR from the web interface, please indicate:
 

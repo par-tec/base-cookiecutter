@@ -78,17 +78,15 @@ Despite the SPC Cloud provider's failover mechanisms, the web services were not 
 
 WRITEME: A list of action items taken to mitigate/fix the problem
 
-- * Action  1
-  * Owner
-- * Action 2
-  * Owner
-...
+- - Action  1
+  - Owner
+- - Action 2
+  - Owner
+    ...
 
 ## Preventive actions
 
 WRITEME: A list of action items to prevent this from happening again
-
-
 
 ## Lessons learned
 

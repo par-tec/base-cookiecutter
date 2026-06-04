@@ -1,3 +1,4 @@
+---
 #
 # Run pre-commit hooks. You can run them without installing
 #  the hook with
@@ -6,23 +7,76 @@
 #
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
+#
+# Note: Use docker images with specific digests to ensure reproducibility and security.
+default_stages:
+- pre-commit
+- manual
+- pre-push
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
-    hooks:
-    # Manage spaces.
-    - id: trailing-whitespace
-    - id: end-of-file-fixer
-    - id: check-added-large-files
-    - id: check-symlinks
-    # Check file syntax/format
-    - id: check-xml
-    - id: check-json
-    - id: check-yaml
-      args: [--allow-multiple-documents]
-    # Security checks.
-    - id: detect-private-key
-    - id: detect-aws-credentials
-      args:
-      # See https://github.com/pre-commit/pre-commit-hooks/issues/174
-      - --allow-missing-credentials
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+  # Manage spaces.
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+  - id: check-added-large-files
+  - id: check-symlinks
+  - id: mixed-line-ending
+    args: [--fix=lf]
+  # Check file syntax/format
+  - id: check-xml
+  - id: check-json
+    exclude: '.devcontainer/.*'  # devcontainer json files can contain comments.
+  - id: check-yaml
+    args: [--allow-multiple-documents]
+  # Security checks.
+  - id: detect-private-key
+  - id: detect-aws-credentials
+    args:
+    # See https://github.com/pre-commit/pre-commit-hooks/issues/174
+    - --allow-missing-credentials
+- repo: https://github.com/google/yamlfmt
+  rev: v0.21.0
+  hooks:
+  - id: yamlfmt
+    files: \.(yaml|yml)$
+    # exclude: 'path/to|another/.*\.yaml$'
+- repo: https://github.com/executablebooks/mdformat
+  rev: 0.7.17
+  hooks:
+  - id: mdformat
+    exclude: '.github/.*'
+    additional_dependencies:
+    - mdformat-tables
+    - mdformat-gfm
+#
+# Security linters.
+#
+- repo: https://github.com/bridgecrewio/checkov.git
+  rev: 3.2.507  # change to tag or sha
+  hooks:
+  - id: checkov
+    stages: ["pre-push"]
+    files: '^Dockerfile$'
+    entry: >-
+      checkov
+
+        -d .
+  - id: checkov_secrets
+    stages: ["pre-push"]
+- repo: https://github.com/zizmorcore/zizmor-pre-commit
+  rev: v1.22.0
+  hooks:
+  - id: zizmor
+- repo: local
+  hooks:
+  - id: trufflehog
+    name: TruffleHog v3.93.3
+    description: Detect secrets in your data.
+    entry: bash -c 'docker run --cpus 2 --rm -v "$(pwd):/workdir"
+      -i --rm docker.io/trufflesecurity/trufflehog@sha256:06c1f230512cbb694954716fa5e0adbfb95809c7bfb5a50c25110847417b69db
+      git file:///workdir --branch HEAD --results=verified,unknown
+      --fail'
+    language: system
+    stages: ["pre-push"]
