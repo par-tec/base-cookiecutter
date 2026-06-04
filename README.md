@@ -55,11 +55,11 @@ Its installation is beyond the scope of this document.
 To test the pipeline locally and ensure that secrets (e.g., service accounts and other credentials)
 are correctly configured, use:
 
- ```bash
- # Run a specific job in the pipeline
- act -j test -s CI_API_TOKEN="$(cat gh-ci.json)" \
-      -s CI_ACCOUNT=my-secret-account
- ```
+```bash
+# Run a specific job in the pipeline
+act -j test -s CI_API_TOKEN="$(cat gh-ci.json)" \
+     -s CI_ACCOUNT=my-secret-account
+```
 
 ## Testing gitlab-ci
 

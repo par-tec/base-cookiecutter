@@ -6,7 +6,6 @@ which components should be verified during the development phase?
 Project tend to grow complex and it is not always easy to understand which components are involved in the test.
 For example, a modern application relies on many moving parts, including container orchestrators, API gateways, datastores & queues, credentials management, and so on.
 
-
 ```mermaid
 graph LR
 

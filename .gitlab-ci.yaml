@@ -1,8 +1,9 @@
+---
 super-linter:
   stage: build
   image:
     name: github/super-linter:v3.15.5
   script:
-    - "true"
+  - "true"
   variables:
     RUN_LOCAL: "true"
