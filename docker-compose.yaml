@@ -17,10 +17,14 @@ services:
     environment:
     - RUN_LOCAL=true
     - VALIDATE_MARKDOWN=false
+    - VALIDATE_MARKDOWN_PRETTIER=false
     - VALIDATE_PYTHON_ISORT=false
     - VALIDATE_XML=false
     - VALIDATE_NATURAL_LANGUAGE=false
     - IGNORE_GITIGNORED_FILES=true
+    - VALIDATE_YAML=false  # YAML delegated to pre-commit
+    - VALIDATE_JSCPD=false  # JSCPD is too slow for our codebase
+
     volumes:
     - .:/tmp/lint/
   # This container will run successfully

@@ -58,7 +58,7 @@ repos:
   hooks:
   - id: checkov
     stages: ["pre-push"]
-    files: '^Dockerfile$'
+    #files: '^Dockerfile$'
     entry: >-
       checkov
 
