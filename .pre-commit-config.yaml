@@ -46,7 +46,7 @@ repos:
   rev: 0.7.17
   hooks:
   - id: mdformat
-    exclude: '.github/.*'
+    exclude: '.github/.*|.gitlab/.*'
     additional_dependencies:
     - mdformat-tables
     - mdformat-gfm

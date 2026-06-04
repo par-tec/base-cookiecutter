@@ -8,17 +8,23 @@ on:
     branches: ["main"]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4.3.1
       with:
         fetch-depth: 0
+        persist-credentials: false
+
     - name: Super-Linter
-      uses: super-linter/super-linter@v8.3.1
+      uses: super-linter/super-linter@47984f49b4e87383eed97890fe2dca6063bbd9c3  # v8.3.1
       env:
         # To report GitHub Actions status checks
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
